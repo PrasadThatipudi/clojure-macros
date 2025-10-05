@@ -13,8 +13,10 @@
 ;;   (when-not false (println "This will print"))
 ;;   (when-not true (println "This won't print"))
 
-(defmacro my-when-not [condition & body])
+(defmacro my-when-not [condition & body]
+  `(when (not ~condition) ~@body))
 
+(my-when-not false (print "This is false"))
 ;; Test your macro:
 ;; (my-when-not false (println "Should print!"))
 ;; (my-when-not true (println "Should NOT print!"))
