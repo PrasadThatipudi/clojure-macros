@@ -12,7 +12,12 @@
 ;;   (debug (+ 10 20))        ; Should print: "(+ 10 20) = 30" and return 30
 ;;   (debug (* 6 7))          ; Should print: "(* 6 7) = 42" and return 42
 
-(defmacro debug [expression])
+(defmacro debug [expression]
+  `(let [result# ~expression]
+     (println '~expression "=" result#)
+     result#))
+
+(println (debug (+ 5 5)))
 
 ;; Test your macro:
 ;; (debug (+ 5 5))
