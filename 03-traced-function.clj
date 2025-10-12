@@ -18,8 +18,14 @@
 ;;   (defn-traced multiply [x y] (* x y))
 ;;   (multiply 3 4)  ; Should print calling info and result
 
-(defmacro defn-traced [name params & body])
+(defmacro defn-traced [name params & body]
+  `(defn ~name ~params
+     (println "calling" '~name "with args:" ~@params)
+     (let [result# (do ~@body)]
+       (println '~name "returning:" result#)
+       result#)))
+
 
 ;; Test your macro:
-;; (defn-traced square [x] (* x x))
-;; (square 5)
+(defn-traced square [x] (* x x))
+(print (square 5))
